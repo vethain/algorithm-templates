@@ -1,0 +1,11 @@
+# CPH 插件本地缓存
+.cph/
+
+# 编译产物
+*.o
+*.out
+a.out
+
+# 系统临时文件
+*.swp
+.DS_Store
