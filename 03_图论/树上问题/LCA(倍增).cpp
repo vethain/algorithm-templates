@@ -87,7 +87,7 @@ int LCA(int x, int y)
     }
     // themin = min(themin, mii[x][0]);
     // themin = min(themin, mii[y][0]);
-    return go[x][0];BUS_ADRALN
+    return go[x][0];
 }
 void solve()
 {

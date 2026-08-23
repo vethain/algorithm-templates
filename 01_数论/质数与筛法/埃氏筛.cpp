@@ -30,7 +30,7 @@ int prm[5800000];
 bool vis[N];
 int E_sieve(int n)
 {
-    fl(vis, false);
+    memset(vis, false, sizeof(vis));
     for (int i = 2; i * i <= n; i++)
     {
         if (!vis[i])

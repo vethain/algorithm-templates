@@ -25,7 +25,7 @@ void fl(Container &container, const typename Container::value_type &val)
 
 const int N = 5e5 + 5;
 const double eps = 1e-9;
-int mod = 1e9 + 7;
+int mod = 998244353;
 
 /*注意模数必须为质数*/
 int fact[N];

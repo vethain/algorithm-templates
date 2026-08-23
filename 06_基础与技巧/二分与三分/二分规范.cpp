@@ -40,12 +40,12 @@ void solve()
         if (check(mid))
         {
             r = mid - 1; 
-            //l = mid + 1
+            //l = mid + 1;
         }
         else
         {
             l = mid + 1;
-            //r = mid - 1
+            //r = mid - 1;
         }
     }
 }
