@@ -35,8 +35,17 @@ int mod = 1e9 + 7;
 
 struct trie
 {
-    int nxt[N][26], cnt;
+    int nxt[N][26], id;
     bool ed[N];
+    void clear()
+    {
+        for (int i = 0; i <= id; i++)
+        {
+            for (int j = 0; j < 26; j++) nxt[i][j] = 0;
+            ed[i] = 0;
+            id = 0;
+        }
+    }
     void insert(string s, int sz)
     {
         int p = 0;
@@ -45,7 +54,7 @@ struct trie
             int c = s[i] - 'a';
             if (!nxt[p][c])
             {
-                nxt[p][c] = ++cnt;
+                nxt[p][c] = ++id;
             }
             p = nxt[p][c];
         }
