@@ -39,12 +39,12 @@ struct trie
     bool ed[N];
     void clear()
     {    
-        idx = 0;
         for (int i = 0; i <= idx; i++)
         {
             for (int j = 0; j < 26; j++) nxt[i][j] = 0;
             ed[i] = 0;
         }
+        idx = 0;
     }
     void insert(string s, int sz)
     {
