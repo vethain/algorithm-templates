@@ -35,15 +35,15 @@ int mod = 1e9 + 7;
 
 struct trie
 {
-    int nxt[N][26], idx;
+    int nxt[N][26], cnt[N], idx;
     bool ed[N];
     void clear()
-    {
+    {    
+        idx = 0;
         for (int i = 0; i <= idx; i++)
         {
             for (int j = 0; j < 26; j++) nxt[i][j] = 0;
             ed[i] = 0;
-            idx = 0;
         }
     }
     void insert(string s, int sz)
