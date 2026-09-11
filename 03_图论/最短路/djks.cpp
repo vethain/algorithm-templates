@@ -32,11 +32,11 @@ void fl(Container &container, const typename Container::value_type &val)
 const int N = 1e5 + 5;
 const double eps = 1e-9;
 int mod = 1e9 + 7;
-//普通  奇偶
 
+//普通  奇偶
 struct edge
 {
-    int u, w;
+    int v, w;
 };
 struct node
 {
@@ -46,12 +46,16 @@ struct node
         return dis > b.dis;
     }
 };
+
 vector<edge> g[N];
 int dist[N], dp[N];
+
 void solve()
 {
     int n, m, s;
     cin >> n >> m >> s;
+    // 清空图和距离数组（多次调用需要）
+    for (int i = 1; i <= n; i++) g[i].clear();
     fl(dist, inf);
     for (int i = 0; i < m; i++)
     {
@@ -96,54 +100,42 @@ void solve()
 }
 
 //奇偶最短路
-struct edge 
-{
-    int v, w; 
-};
-struct node 
-{
-    int dis, u, p;
-    bool operator>(const node &b) const
-    {
-        return dis > b.dis;
-    }
-};
- 
-vector<int> g[N];
-int dist[N][2];
- 
-void solve() 
+// 注意：全局已有 g 为 edge 类型，这里改用 adj 避免冲突
+vector<int> adj[N];
+int d[N][2];                // 改用 d 避免与 dist 冲突
+
+void solve2()               // 建议改名，避免与上面的 solve 冲突，实际使用时二选一
 {
     int n, m, k;
     cin >> n >> m >> k;
-    vector <int> ok(n + 1, 0);
-    for (int i = 1; i <= n; i++) 
+    vector<int> ok(n + 1, 0);
+    for (int i = 1; i <= n; i++)
     {
-        g[i].clear();
-        dist[i][0] = dist[i][1] = inf;
+        adj[i].clear();
+        d[i][0] = d[i][1] = inf;
     }
-    for (int i = 0; i < m; i++) 
+    for (int i = 0; i < m; i++)
     {
         int u, v;
         cin >> u >> v;
         if (u == v) ok[u] = 1;
-        g[u].push_back(v);
-        g[v].push_back(u);
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
-    queue<pair<int, int>> q; 
-    dist[1][0] = 0;
+    queue<pair<int, int>> q;
+    d[1][0] = 0;
     q.push({1, 0});
-    while (!q.empty()) 
+    while (!q.empty())
     {
         auto [u, p] = q.front();
         q.pop();
-        int dis = dist[u][p];
-        for (int v : g[u]) 
+        int dis = d[u][p];
+        for (int v : adj[u])
         {
             int np = p ^ 1;
-            if (dist[v][np] > dis + 1) 
+            if (d[v][np] > dis + 1)
             {
-                dist[v][np] = dis + 1;
+                d[v][np] = dis + 1;
                 q.push({v, np});
             }
         }
