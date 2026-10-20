@@ -58,6 +58,24 @@ int dfs(int pos, State state, bool lmt, bool num) {
 }
 */
 
+
+int dp[30][30][30];
+int dig[30];
+
+int dfs(int pos, int c0, int c1, bool num, bool lmt)
+{
+    if (pos < 0) return (c0 >= c1 ? 1 : 0);
+    if (num && !lmt && dp[pos][c0][c1] != -1) return dp[pos][c0][c1];
+    int up = (lmt ? dig[pos] : 1);
+    int res = 0;
+    int now = c0;
+    if (num) now++;
+    res += dfs(pos - 1, now, c1, num, lmt && dig[pos] == 0);
+    if (up) res += dfs(pos - 1, c0, c1 + 1, 1, lmt && dig[pos] == 1);
+    if (num && !lmt) dp[pos][c0][c1] = res;
+    return res;
+}
+
 void solve() 
 {
     
